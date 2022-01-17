@@ -1,0 +1,14 @@
+<br>
+<div class="text-center bg-light p-3 border">
+<%= form_with(model: @item, local: true) do |f| %>
+  <h2>Update price of <%=@item.name%></h2>
+  <br>
+  <p> 
+    <%= f.label :Change_Price %><br/> 
+    <%= f.text_field :price %>
+  </p>
+  <p>
+    <%= f.submit %> 
+  </p>
+<% end %>
+</div>

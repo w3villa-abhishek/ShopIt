@@ -1,0 +1,24 @@
+<br>
+<h1>Enter the Quantities of the products...</h1>
+
+<%= form_with(scope: :quantity, url: price_path, local: true) do |f| %>
+
+  <p>
+    <%= f.label :MUG %><br/> 
+    <%= f.number_field :MUG %> 
+  </p>
+  <p>
+    <%= f.label :TSHIRT %><br/> 
+    <%= f.number_field :TSHIRT %> 
+  </p>
+  <p>
+    <%= f.label :HOODIE %><br/> 
+    <%= f.number_field :HOODIE %> 
+  </p>
+
+  <p>
+    <%= f.submit("Calculate price") %> 
+  </p>
+<% end %>
+
+<%=link_to 'Go back to items list', items_path, class: 'btn btn-danger'%>

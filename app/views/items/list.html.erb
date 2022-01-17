@@ -1,15 +1,19 @@
-<h2 class="text-center">Items available to shop</h2>
 <br>
+<h1 class="text-center">Items available to shop</h1>
+<br><br>
 
 <%@items.each do |item|%>
   <div class="card text-center">
     <div class="card-body">
       <h5 class="card-title"><%=item.code%></h5>
-      Name: <p class="card-text"><%=item.name%></p>
-      Price:  <a href="#" class="btn btn-primary"><%=item.price%></a>
+       <p class="card-text">Name: <%=item.name%></p>
+       <p class="card-text">Price: <%=item.price%> €</p>
+        <%= link_to 'Edit price', edit_item_path(item), class: 'btn btn-primary'%>
     </div>
   </div>
 <%end%>
+<%= link_to 'Home page', root_path, class: 'btn btn-dark'%>
+
 
 
 
