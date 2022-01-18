@@ -7,6 +7,13 @@
     <div class="card-body">
       <h5 class="card-title"><%=item.code%></h5>
        <p class="card-text">Name: <%=item.name%></p>
+       <%if item.code == "MUG"%>
+       <p>***Get one mug free, for every other purchase on mug</p>
+       <%end%>
+
+       <%if item.code == "TSHIRT"%>
+       <p>***Get flat 30% off, if you buy three or more items..</p>
+       <%end%>
        <p class="card-text">Price: <%=item.price%> €</p>
         <%= link_to 'Edit price', edit_item_path(item), class: 'btn btn-primary'%>
     </div>
