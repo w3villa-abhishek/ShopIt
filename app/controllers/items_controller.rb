@@ -33,8 +33,10 @@ class ItemsController < ApplicationController
 		mug = params[:quantity][:MUG].to_i
 		tshirt = params[:quantity][:TSHIRT].to_i
 		hoodie = params[:quantity][:HOODIE].to_i
-
-		$total_price = total_price(mug,tshirt,hoodie)
+		$orignal_total_price = total_price(mug,tshirt,hoodie,@tshirt_price)
+		mug = (mug>1) ? mug-1 : mug  
+		@tshirt_price = (tshirt>2) ? @tshirt_price*0.70 : @tshirt_price
+		$total_price = total_price(mug,tshirt,hoodie,@tshirt_price)
 		redirect_to total_path
 		flash[:notice] = "Discounted price calculated successfully..."
 	end
@@ -47,11 +49,10 @@ class ItemsController < ApplicationController
 			@hoodie_price = Item.find_by(code: "HOODIE").price
 		end
 
-		def total_price(mug, tshirt, hoodie)
-			mug = (mug%2==0) ? mug/2 : (mug/2)+1  
-			@tshirt_price = (tshirt>2) ? @tshirt_price*0.70 : @tshirt_price
+		def total_price(mug, tshirt, hoodie,tshirt_price)
+			
 			answer = (mug*@mug_price) + 
-					(tshirt*@tshirt_price) +
+					(tshirt*tshirt_price) +
 					(hoodie*@hoodie_price)
 		end
 
