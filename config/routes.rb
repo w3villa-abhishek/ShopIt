@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   root to: 'items#home'
   get 'items', to: 'items#list'
   get 'price', to: 'items#price'
-  post 'price', to: 'items#calculate_price'
-  get 'total', to: 'items#total'
+  post 'price', to: 'items#total'
   resources :items, only: [:edit, :update]
 
 end

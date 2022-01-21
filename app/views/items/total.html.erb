@@ -1,10 +1,12 @@
 <br>
+<%params[:quantity].each do |k,v|%>
 <ul class="list-group">  
-  <li class="list-group-item list-group-item-primary">Price of each mug: <%=@mug_price%></li>
-  <li class="list-group-item list-group-item-secondary">Price of each T shirt: <%=@tshirt_price%>
-</li>
-  <li class="list-group-item list-group-item-success">Price of each hoodie: <%=@hoodie_price%></li>
-  <br><br>
-  <li class="list-group-item list-group-item-dark text-center">Total price for the selected quantities: <strong><%=$orignal_total_price%></strong></li>
-  <li class="list-group-item list-group-item-danger text-center">Total discounted price for the selected quantities: <strong><%=$total_price%></strong></li>
-</ul>
+  <li class="list-group-item list-group-item-primary">Number of <%=k%> : <%=v%></li>
+</ul>  
+<%end%>  
+<br><br>
+
+ <li class="list-group-item list-group-item-danger text-center">Total Price: <%=@price%> €</li>
+ <%if @discounted_price%>
+ <li class="list-group-item list-group-item-danger text-center">Discounted Price: <%=@discounted_price%> €</li> 
+ <%end%>

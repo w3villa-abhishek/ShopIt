@@ -1,12 +1,16 @@
 class ItemsController < ApplicationController
 
-	before_action :define_price, only: [:total, :calculate_price, :total_price]
+include AdditionalHelper
+
 
 	def home
 	end
 
 	def list
 		@items = Item.all
+	end
+
+	def price
 	end
 
 	def edit
@@ -23,37 +27,12 @@ class ItemsController < ApplicationController
 		end
 	end
 
-	def price
-	end
-
 	def total
-	end
-
-	def calculate_price
-		mug = params[:quantity][:MUG].to_i
-		tshirt = params[:quantity][:TSHIRT].to_i
-		hoodie = params[:quantity][:HOODIE].to_i
-		$orignal_total_price = total_price(mug,tshirt,hoodie,@tshirt_price)
-		mug = (mug>1) ? mug-1 : mug  
-		@tshirt_price = (tshirt>2) ? @tshirt_price*0.70 : @tshirt_price
-		$total_price = total_price(mug,tshirt,hoodie,@tshirt_price)
-		redirect_to total_path
-		flash[:notice] = "Discounted price calculated successfully..."
-	end
-
-	private
-
-		def define_price
-			@mug_price = Item.find_by(code: "MUG").price
-			@tshirt_price = Item.find_by(code: "TSHIRT").price
-			@hoodie_price = Item.find_by(code: "HOODIE").price
+		@price = calculate_total_price(params[:quantity])
+		if(params[:quantity][:MUG].to_i > 1 || params[:quantity][:TSHIRT].to_i >2)
+			flash.now[:notice] = "Congratulations! You're eligible for discounts..."
+			@discounted_price = @price-discount_on_price(params[:quantity])
 		end
-
-		def total_price(mug, tshirt, hoodie,tshirt_price)
-			
-			answer = (mug*@mug_price) + 
-					(tshirt*tshirt_price) +
-					(hoodie*@hoodie_price)
-		end
+	end
 
 end
